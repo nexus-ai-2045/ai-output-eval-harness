@@ -25,6 +25,14 @@ python -m ai_output_eval run --input examples/sample-output.jsonl --out reports/
 python -m ai_output_eval summarize --input reports/eval.jsonl --out reports/summary.md
 ```
 
+元記事型の価値観ラベルと行列を作る場合:
+
+```powershell
+python -m ai_output_eval label-values --input examples/sample-output.jsonl --out reports/value-labels.jsonl
+python -m ai_output_eval matrix --input reports/value-labels.jsonl --out reports/value-matrix.csv
+python -m ai_output_eval compare --input reports/value-labels.jsonl --out reports/value-comparison.md
+```
+
 ## 入力形式
 
 1行1ケースのJSONLです。詳しくは [docs/evaluation-schema.md](docs/evaluation-schema.md) を参照してください。
@@ -51,5 +59,8 @@ MVPでは、ローカルで再現可能な決定的チェックを優先しま�
 - 文字列根拠に基づくunsupported claim検出
 - confidenceと空欄/不明表現に基づく姿勢ラベル
 - Markdown集計
+- 価値観カタログに基づくpresent/absentラベル
+- ケース x 価値観 行列
+- モデル/言語/タスク別の軸比較
 
 LLM judgeや外部モデル評価は、後続で追加します。

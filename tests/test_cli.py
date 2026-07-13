@@ -13,5 +13,4 @@ def test_cli_run_and_summarize(tmp_path: Path):
     assert main(["summarize", "--input", str(eval_path), "--out", str(summary_path)]) == 0
     summary = summary_path.read_text(encoding="utf-8")
     assert "AI Output Eval Summary" in summary
-    assert "cases: 2" in summary
-
+    assert "cases: 3" in summary
