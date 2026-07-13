@@ -172,6 +172,10 @@ python -m pytest
 
 GitHub Actions用のCI設定も含まれています。
 
+## License
+
+MIT License. See [LICENSE](LICENSE).
+
 ## ドキュメント
 
 - [仕組み完成条件](docs/mechanism-completion.md)

@@ -10,12 +10,12 @@
 - CI: pytest用GitHub Actionsあり
 - SECURITY.md: あり
 - CONTRIBUTING.md: あり
+- LICENSE: MIT
 - 生成物: `reports/` は `.gitignore` 対象
 - GitHub作成/push/public化: 未実施
 
 ## 公開前に必要な判断
 
-- LICENSEを何にするか
 - サンプルデータを公開してよいか
 - READMEの言語を日本語中心にするか、英語版も併記するか
 - PyPI公開を目指すか、GitHubリポだけにするか
@@ -26,7 +26,6 @@
 - secret scan
 - personal path scan
 - `reports/` やローカル生成物が追跡されていないこと
-- `LICENSE` の追加
 - GitHub上でSecurity Advisoriesを有効化するか確認
 - GitHub Actionsの追加
 
