@@ -22,6 +22,7 @@ def run_pipeline(
     title: str,
     source_url: str | None = None,
     components: int = 4,
+    force: bool = False,
 ) -> dict[str, Any]:
     out_dir.mkdir(parents=True, exist_ok=True)
     obsidian_dir = out_dir / "obsidian"
@@ -38,6 +39,12 @@ def run_pipeline(
         "obsidian_base": obsidian_dir / "value-profile-reports.base",
         "manifest_json": out_dir / "manifest.json",
     }
+    existing_outputs = [path for path in paths.values() if path.exists()]
+    if existing_outputs and not force:
+        preview = ", ".join(str(path) for path in existing_outputs[:3])
+        if len(existing_outputs) > 3:
+            preview += f", ... ({len(existing_outputs)} files)"
+        raise FileExistsError(f"pipeline outputs already exist: {preview}; pass --force to overwrite")
 
     value_labels = [label_values(case, catalog) for case in cases]
     matrix_columns, matrix_rows = value_matrix_rows(value_labels, catalog)

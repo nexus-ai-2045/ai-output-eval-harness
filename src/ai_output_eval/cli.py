@@ -141,6 +141,7 @@ def pipeline_command(args: argparse.Namespace) -> int:
         title=args.title,
         source_url=args.source_url,
         components=args.components,
+        force=args.force,
     )
     print(f"wrote pipeline manifest: {manifest['manifest']}")
     return 0
@@ -208,6 +209,7 @@ def build_parser() -> argparse.ArgumentParser:
     pipeline_parser.add_argument("--catalog", help="value catalog JSON path")
     pipeline_parser.add_argument("--components", type=int, default=4, help="number of reduction components to extract")
     pipeline_parser.add_argument("--source-url", help="source article URL")
+    pipeline_parser.add_argument("--force", action="store_true", help="overwrite an existing pipeline manifest")
     pipeline_parser.set_defaults(func=pipeline_command)
 
     return parser

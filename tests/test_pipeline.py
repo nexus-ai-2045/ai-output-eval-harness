@@ -29,3 +29,30 @@ def test_pipeline_writes_full_report_bundle(tmp_path: Path):
     assert manifest["cases"] == 3
     assert manifest["catalog_values"] >= 10
 
+
+def test_pipeline_refuses_existing_manifest_without_force(tmp_path: Path):
+    out_dir = tmp_path / "bundle"
+
+    assert main(["pipeline", "--input", "examples/sample-output.jsonl", "--out-dir", str(out_dir)]) == 0
+
+    try:
+        main(["pipeline", "--input", "examples/sample-output.jsonl", "--out-dir", str(out_dir)])
+    except FileExistsError as exc:
+        assert "pass --force" in str(exc)
+    else:
+        raise AssertionError("expected existing manifest to fail without --force")
+
+    assert main(["pipeline", "--input", "examples/sample-output.jsonl", "--out-dir", str(out_dir), "--force"]) == 0
+
+
+def test_pipeline_refuses_existing_partial_outputs_without_force(tmp_path: Path):
+    out_dir = tmp_path / "bundle"
+    out_dir.mkdir()
+    (out_dir / "summary.md").write_text("old", encoding="utf-8")
+
+    try:
+        main(["pipeline", "--input", "examples/sample-output.jsonl", "--out-dir", str(out_dir)])
+    except FileExistsError as exc:
+        assert "pipeline outputs already exist" in str(exc)
+    else:
+        raise AssertionError("expected existing partial output to fail without --force")

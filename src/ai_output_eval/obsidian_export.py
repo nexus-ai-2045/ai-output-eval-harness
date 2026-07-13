@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 from pathlib import Path
+import json
 
 
 def build_obsidian_note(
@@ -15,7 +16,7 @@ def build_obsidian_note(
     created = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     sections: list[str] = [
         "---",
-        f"title: {title}",
+        f"title: {_yaml_string(title)}",
         f"created: {created}",
         "tags:",
         "  - ai-eval",
@@ -56,7 +57,9 @@ def resolve_obsidian_output(*, out: Path | None, vault_dir: Path | None, note_pa
         raise ValueError("--note-path is required when --vault-dir is provided")
     candidate = (vault_dir / note_path).resolve()
     vault_root = vault_dir.resolve()
-    if not str(candidate).lower().startswith(str(vault_root).lower()):
+    try:
+        candidate.relative_to(vault_root)
+    except ValueError as exc:
         raise ValueError("note path must stay within vault-dir")
     if candidate.suffix.lower() != ".md":
         candidate = candidate.with_suffix(".md")
@@ -103,3 +106,7 @@ def _demote_headings(text: str) -> str:
         else:
             lines.append(line)
     return "\n".join(lines)
+
+
+def _yaml_string(value: str) -> str:
+    return json.dumps(value, ensure_ascii=False)

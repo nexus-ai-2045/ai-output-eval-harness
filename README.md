@@ -31,6 +31,8 @@ python -m ai_output_eval summarize --input reports/eval.jsonl --out reports/summ
 python -m ai_output_eval pipeline --input examples/sample-output.jsonl --out-dir reports/full --title "Value Profile Report"
 ```
 
+同じ出力先を上書きする場合は `--force` を付けます。
+
 元記事型の価値観ラベルと行列を作る場合:
 
 ```powershell

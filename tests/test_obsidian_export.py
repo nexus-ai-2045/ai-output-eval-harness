@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from ai_output_eval.cli import main
-from ai_output_eval.obsidian_export import resolve_obsidian_output
+from ai_output_eval.obsidian_export import build_obsidian_note, resolve_obsidian_output
 
 
 def test_obsidian_export_writes_note(tmp_path: Path):
@@ -36,3 +36,22 @@ def test_resolve_obsidian_output_rejects_path_escape(tmp_path: Path):
     else:
         raise AssertionError("expected path escape to fail")
 
+
+def test_resolve_obsidian_output_rejects_prefix_sibling(tmp_path: Path):
+    vault = tmp_path / "vault"
+    sibling = tmp_path / "vault-other"
+    vault.mkdir()
+    sibling.mkdir()
+
+    try:
+        resolve_obsidian_output(out=None, vault_dir=vault, note_path="../vault-other/report.md")
+    except ValueError as exc:
+        assert "within vault-dir" in str(exc)
+    else:
+        raise AssertionError("expected sibling prefix escape to fail")
+
+
+def test_obsidian_frontmatter_quotes_title():
+    note = build_obsidian_note(title='Report: "Value"\nNext')
+
+    assert 'title: "Report: \\"Value\\"\\nNext"' in note
