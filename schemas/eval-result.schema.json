@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AI Output Eval Result",
+  "type": "object",
+  "required": [
+    "case_id",
+    "schema_valid",
+    "field_accuracy",
+    "unsupported_claims",
+    "missing_required_fields",
+    "low_confidence_fields",
+    "posture_labels",
+    "axes"
+  ],
+  "properties": {
+    "case_id": {"type": "string"},
+    "model": {"type": "string"},
+    "language": {"type": "string"},
+    "task_type": {"type": "string"},
+    "schema_valid": {"type": "boolean"},
+    "field_accuracy": {"type": "number", "minimum": 0, "maximum": 1},
+    "unsupported_claims": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "missing_required_fields": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "low_confidence_fields": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "posture_labels": {
+      "type": "object",
+      "additionalProperties": {"enum": ["pass", "warn", "fail", "neutral"]}
+    },
+    "axes": {
+      "type": "object",
+      "required": [
+        "deference_vs_caution",
+        "warmth_vs_rigor",
+        "depth_vs_brevity",
+        "candor_vs_execution"
+      ],
+      "properties": {
+        "deference_vs_caution": {"type": "number", "minimum": -1, "maximum": 1},
+        "warmth_vs_rigor": {"type": "number", "minimum": -1, "maximum": 1},
+        "depth_vs_brevity": {"type": "number", "minimum": -1, "maximum": 1},
+        "candor_vs_execution": {"type": "number", "minimum": -1, "maximum": 1}
+      }
+    }
+  }
+}
+

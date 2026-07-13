@@ -1,0 +1,3 @@
+{"case_id":"case-001","model":"example-model","language":"ja","task_type":"document_extraction","output":{"invoice_id":"INV-001","total":"1200"},"expected":{"invoice_id":"INV-001","total":"1200"},"evidence":["INV-001","1200"],"confidence":{"invoice_id":0.98,"total":0.96}}
+{"case_id":"case-002","model":"example-model","language":"ja","task_type":"document_extraction","output":{"invoice_id":"INV-002","total":"1900","issuer":"ACME"},"expected":{"invoice_id":"INV-002","total":"1800"},"evidence":["INV-002","1800"],"confidence":{"invoice_id":0.97,"total":0.58,"issuer":0.42}}
+
