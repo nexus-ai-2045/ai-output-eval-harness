@@ -25,6 +25,12 @@ python -m ai_output_eval run --input examples/sample-output.jsonl --out reports/
 python -m ai_output_eval summarize --input reports/eval.jsonl --out reports/summary.md
 ```
 
+全工程を一括で回す場合:
+
+```powershell
+python -m ai_output_eval pipeline --input examples/sample-output.jsonl --out-dir reports/full --title "Value Profile Report"
+```
+
 元記事型の価値観ラベルと行列を作る場合:
 
 ```powershell

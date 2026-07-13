@@ -20,6 +20,7 @@ from .evaluators.value_compare import compare_value_labels
 from .evaluators.value_labeler import label_values, value_matrix_rows
 from .io import read_jsonl, write_csv, write_jsonl, write_text
 from .obsidian_export import build_obsidian_base, build_obsidian_note, resolve_obsidian_output
+from .pipeline import run_pipeline
 
 
 def evaluate_case(case: dict[str, Any]) -> dict[str, Any]:
@@ -128,6 +129,23 @@ def obsidian_base_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def pipeline_command(args: argparse.Namespace) -> int:
+    cases = read_jsonl(Path(args.input))
+    catalog = load_catalog(Path(args.catalog) if args.catalog else None)
+    eval_results = [evaluate_case(case) for case in cases]
+    manifest = run_pipeline(
+        cases=cases,
+        eval_results=eval_results,
+        catalog=catalog,
+        out_dir=Path(args.out_dir),
+        title=args.title,
+        source_url=args.source_url,
+        components=args.components,
+    )
+    print(f"wrote pipeline manifest: {manifest['manifest']}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="ai-eval")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -182,6 +200,15 @@ def build_parser() -> argparse.ArgumentParser:
     base_parser.add_argument("--vault-dir", help="Obsidian vault directory")
     base_parser.add_argument("--note-path", help="base path inside vault, for example Bases/value-profile-reports.base")
     base_parser.set_defaults(func=obsidian_base_command)
+
+    pipeline_parser = subparsers.add_parser("pipeline", help="run the full local reproduction pipeline")
+    pipeline_parser.add_argument("--input", required=True, help="input JSONL path")
+    pipeline_parser.add_argument("--out-dir", required=True, help="directory for all generated reports")
+    pipeline_parser.add_argument("--title", default="Value Profile Report", help="Obsidian note/report title")
+    pipeline_parser.add_argument("--catalog", help="value catalog JSON path")
+    pipeline_parser.add_argument("--components", type=int, default=4, help="number of reduction components to extract")
+    pipeline_parser.add_argument("--source-url", help="source article URL")
+    pipeline_parser.set_defaults(func=pipeline_command)
 
     return parser
 
