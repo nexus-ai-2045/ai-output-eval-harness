@@ -30,7 +30,10 @@ python -m ai_output_eval summarize --input reports/eval.jsonl --out reports/summ
 ```powershell
 python -m ai_output_eval label-values --input examples/sample-output.jsonl --out reports/value-labels.jsonl
 python -m ai_output_eval matrix --input reports/value-labels.jsonl --out reports/value-matrix.csv
+python -m ai_output_eval reduce --input reports/value-labels.jsonl --out reports/value-reduction.md
 python -m ai_output_eval compare --input reports/value-labels.jsonl --out reports/value-comparison.md
+python -m ai_output_eval obsidian-export --title "Value Profile Report" --summary reports/summary.md --comparison reports/value-comparison.md --reduction reports/value-reduction.md --out reports/obsidian/value-profile-report.md
+python -m ai_output_eval obsidian-base --out reports/obsidian/value-profile-reports.base
 ```
 
 ## 入力形式
@@ -61,6 +64,8 @@ MVPでは、ローカルで再現可能な決定的チェックを優先しま�
 - Markdown集計
 - 価値観カタログに基づくpresent/absentラベル
 - ケース x 価値観 行列
+- 行列からのデータ駆動成分抽出
 - モデル/言語/タスク別の軸比較
+- Obsidian向けMarkdownエクスポート
 
 LLM judgeや外部モデル評価は、後続で追加します。

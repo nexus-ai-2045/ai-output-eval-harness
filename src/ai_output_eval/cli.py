@@ -13,11 +13,13 @@ from .evaluators.posture_labeler import (
     low_confidence_fields,
     missing_required_fields,
 )
+from .evaluators.reducer import reduce_value_matrix, reduction_report
 from .evaluators.schema_check import check_case_schema
 from .evaluators.unsupported_claims import find_unsupported_claims
 from .evaluators.value_compare import compare_value_labels
 from .evaluators.value_labeler import label_values, value_matrix_rows
 from .io import read_jsonl, write_csv, write_jsonl, write_text
+from .obsidian_export import build_obsidian_base, build_obsidian_note, resolve_obsidian_output
 
 
 def evaluate_case(case: dict[str, Any]) -> dict[str, Any]:
@@ -89,6 +91,43 @@ def compare_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def reduce_command(args: argparse.Namespace) -> int:
+    labels = read_jsonl(Path(args.input))
+    catalog = load_catalog(Path(args.catalog) if args.catalog else None)
+    result = reduce_value_matrix(labels, catalog, components=args.components)
+    write_text(Path(args.out), reduction_report(result))
+    return 0
+
+
+def obsidian_export_command(args: argparse.Namespace) -> int:
+    note = build_obsidian_note(
+        title=args.title,
+        summary_path=Path(args.summary) if args.summary else None,
+        comparison_path=Path(args.comparison) if args.comparison else None,
+        reduction_path=Path(args.reduction) if args.reduction else None,
+        source_url=args.source_url,
+    )
+    out = resolve_obsidian_output(
+        out=Path(args.out) if args.out else None,
+        vault_dir=Path(args.vault_dir) if args.vault_dir else None,
+        note_path=args.note_path,
+    )
+    write_text(out, note)
+    return 0
+
+
+def obsidian_base_command(args: argparse.Namespace) -> int:
+    out = resolve_obsidian_output(
+        out=Path(args.out) if args.out else None,
+        vault_dir=Path(args.vault_dir) if args.vault_dir else None,
+        note_path=args.note_path,
+    )
+    if out.suffix.lower() != ".base":
+        out = out.with_suffix(".base")
+    write_text(out, build_obsidian_base())
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="ai-eval")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -115,10 +154,34 @@ def build_parser() -> argparse.ArgumentParser:
     matrix_parser.add_argument("--catalog", help="value catalog JSON path")
     matrix_parser.set_defaults(func=matrix_command)
 
+    reduce_parser = subparsers.add_parser("reduce", help="extract data-driven components from value labels")
+    reduce_parser.add_argument("--input", required=True, help="value labels JSONL path")
+    reduce_parser.add_argument("--out", required=True, help="reduction Markdown path")
+    reduce_parser.add_argument("--catalog", help="value catalog JSON path")
+    reduce_parser.add_argument("--components", type=int, default=4, help="number of components to extract")
+    reduce_parser.set_defaults(func=reduce_command)
+
     compare_parser = subparsers.add_parser("compare", help="write value profile comparison Markdown")
     compare_parser.add_argument("--input", required=True, help="value labels JSONL path")
     compare_parser.add_argument("--out", required=True, help="comparison Markdown path")
     compare_parser.set_defaults(func=compare_command)
+
+    obsidian_parser = subparsers.add_parser("obsidian-export", help="write an Obsidian-ready Markdown note")
+    obsidian_parser.add_argument("--title", required=True, help="note title")
+    obsidian_parser.add_argument("--out", help="output Markdown path")
+    obsidian_parser.add_argument("--vault-dir", help="Obsidian vault directory")
+    obsidian_parser.add_argument("--note-path", help="note path inside vault, for example Reports/value-profile.md")
+    obsidian_parser.add_argument("--summary", help="summary Markdown path")
+    obsidian_parser.add_argument("--comparison", help="comparison Markdown path")
+    obsidian_parser.add_argument("--reduction", help="reduction Markdown path")
+    obsidian_parser.add_argument("--source-url", help="source article URL")
+    obsidian_parser.set_defaults(func=obsidian_export_command)
+
+    base_parser = subparsers.add_parser("obsidian-base", help="write an Obsidian Bases index for generated reports")
+    base_parser.add_argument("--out", help="output .base path")
+    base_parser.add_argument("--vault-dir", help="Obsidian vault directory")
+    base_parser.add_argument("--note-path", help="base path inside vault, for example Bases/value-profile-reports.base")
+    base_parser.set_defaults(func=obsidian_base_command)
 
     return parser
 
