@@ -11,6 +11,7 @@
 - SECURITY.md: あり
 - CONTRIBUTING.md: あり
 - LICENSE: MIT
+- Versioning: `pyproject.toml` をSSOTにした `version` コマンドあり
 - 生成物: `reports/` は `.gitignore` 対象
 - GitHub作成/push/public化: 未実施
 
@@ -28,6 +29,7 @@
 - `reports/` やローカル生成物が追跡されていないこと
 - GitHub上でSecurity Advisoriesを有効化するか確認
 - GitHub Actionsの追加
+- release tag運用を決める
 
 ## 人間レビュー境界
 

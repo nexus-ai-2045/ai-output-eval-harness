@@ -1,5 +1,7 @@
 # ai-output-eval-harness
 
+Current version: `0.1.0`
+
 AI出力を、正誤だけでなく「根拠」「慎重さ」「厳密さ」「率直さ」「価値観ラベル」まで含めてローカル評価するためのハーネスです。
 
 Anthropic の価値観分析記事のように、出力に表れる傾向を `present/absent` ラベル、ケース x 価値観行列、軸スコア、比較レポートとして扱える形を目指しています。
@@ -26,6 +28,12 @@ python -m pip install -e .
 Python 3.11以上を想定しています。現在のMVPは外部依存なしで動きます。
 
 ## クイックスタート
+
+バージョン確認:
+
+```powershell
+python -m ai_output_eval version
+```
 
 全工程を一括実行します。
 
@@ -185,6 +193,7 @@ MIT License. See [LICENSE](LICENSE).
 - [価値姿勢の軸](docs/value-posture-axes.md)
 - [評価入出力スキーマ](docs/evaluation-schema.md)
 - [Public Readiness](docs/public-readiness.md)
+- [Versioning](docs/versioning.md)
 
 ## Contributing / Security
 

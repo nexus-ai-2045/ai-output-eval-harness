@@ -11,6 +11,7 @@ from ai_output_eval.evaluators.value_compare import compare_value_labels
 from ai_output_eval.evaluators.value_labeler import label_values, value_matrix_rows
 from ai_output_eval.io import write_csv, write_json, write_jsonl, write_text
 from ai_output_eval.obsidian_export import build_obsidian_base, build_obsidian_note
+from ai_output_eval.version import get_version
 
 
 def run_pipeline(
@@ -71,6 +72,7 @@ def run_pipeline(
 
     manifest = {
         "schema_version": "0.1.0",
+        "tool_version": get_version(),
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "title": title,
         "source_url": source_url or "",

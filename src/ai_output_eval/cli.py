@@ -21,6 +21,7 @@ from .evaluators.value_labeler import label_values, value_matrix_rows
 from .io import read_jsonl, write_csv, write_jsonl, write_text
 from .obsidian_export import build_obsidian_base, build_obsidian_note, resolve_obsidian_output
 from .pipeline import run_pipeline
+from .version import get_version
 
 
 def evaluate_case(case: dict[str, Any]) -> dict[str, Any]:
@@ -147,6 +148,11 @@ def pipeline_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def version_command(args: argparse.Namespace) -> int:
+    print(get_version())
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="ai-eval")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -211,6 +217,9 @@ def build_parser() -> argparse.ArgumentParser:
     pipeline_parser.add_argument("--source-url", help="source article URL")
     pipeline_parser.add_argument("--force", action="store_true", help="overwrite an existing pipeline manifest")
     pipeline_parser.set_defaults(func=pipeline_command)
+
+    version_parser = subparsers.add_parser("version", help="print package version")
+    version_parser.set_defaults(func=version_command)
 
     return parser
 
