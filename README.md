@@ -163,14 +163,13 @@ python -m ai_output_eval obsidian-export `
 - Obsidian用ノートを生成できる
 - pytestで主要な回帰を固定している
 
-まだ研究品質・公開品質を厚くする余地があります。
+まだ研究品質を厚くする余地があります。
 
 - 日本語価値観カタログの拡張
 - gold label datasetの作成
 - LLM judgeの追加
 - PCA/SVDなど標準ライブラリによる次元削減オプション
 - 実データセットでの比較レポート
-- CI、LICENSE、SECURITY.mdなど公開準備
 
 ## テスト
 
@@ -192,7 +191,7 @@ MIT License. See [LICENSE](LICENSE).
 - [Obsidian連携](docs/obsidian-integration.md)
 - [価値姿勢の軸](docs/value-posture-axes.md)
 - [評価入出力スキーマ](docs/evaluation-schema.md)
-- [Public Readiness](docs/public-readiness.md)
+- [公開準備チェック](docs/public-readiness.md)
 - [Versioning](docs/versioning.md)
 
 ## Contributing / Security

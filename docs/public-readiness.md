@@ -1,4 +1,4 @@
-# Public Readiness
+# 公開準備チェック
 
 このリポジトリをpublic化する前の確認リストです。
 
@@ -14,6 +14,9 @@
 - Versioning: `pyproject.toml` をSSOTにした `version` コマンドあり
 - 生成物: `reports/` は `.gitignore` 対象
 - GitHub作成/push/public化: 未実施
+- secret pattern scan: 検出なし（2026-07-16）
+- personal path scan: 検出なし（2026-07-16）
+- Git履歴の作者情報: 個人名義を含むため、人間レビューが必要
 
 ## 公開前に必要な判断
 
@@ -28,7 +31,7 @@
 - personal path scan
 - `reports/` やローカル生成物が追跡されていないこと
 - GitHub上でSecurity Advisoriesを有効化するか確認
-- GitHub Actionsの追加
+- GitHub Actionsが新規環境でテスト依存を導入できること
 - release tag運用を決める
 
 ## 人間レビュー境界

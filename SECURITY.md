@@ -1,18 +1,17 @@
-# Security Policy
+# セキュリティポリシー
 
-## Supported Versions
+## サポート対象
 
-This project is pre-release. Security fixes target the latest `main` branch until versioned releases exist.
+このプロジェクトはプレリリース段階です。バージョン付きリリースを開始するまでは、最新の `main` ブランチをセキュリティ修正の対象とします。
 
-## Reporting a Vulnerability
+## 脆弱性の報告
 
-Do not disclose suspected vulnerabilities publicly before maintainers have reviewed them.
+メンテナーが確認する前に、脆弱性の疑いを公開しないでください。
 
-For now, open a private report through the repository owner's preferred private channel. If GitHub Security Advisories are enabled later, use that channel.
+現時点では、リポジトリ所有者が案内する非公開経路から報告してください。GitHub Security Advisoriesを有効化した後は、その非公開報告機能を使用してください。
 
-## Data Handling
+## データの取り扱い
 
-This tool is designed for local evaluation. Avoid committing real user conversations, private documents, secrets, API keys, generated reports, or Obsidian vault contents.
+このツールはローカル評価を前提にしています。実在するユーザーの会話、非公開文書、secret、API key、生成レポート、Obsidian vaultの内容をコミットしないでください。
 
-Generated outputs under `reports/` are ignored by git by default.
-
+`reports/` 配下の生成物は既定でGitの追跡対象外です。

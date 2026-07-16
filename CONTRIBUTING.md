@@ -1,23 +1,22 @@
-# Contributing
+# コントリビューションガイド
 
-Thanks for improving `ai-output-eval-harness`.
+`ai-output-eval-harness` の改善に関心を持っていただき、ありがとうございます。
 
-## Local Setup
+## ローカルセットアップ
 
 ```powershell
-python -m pip install -e .
+python -m pip install -e ".[test]"
 python -m pytest
 ```
 
-## Development Rules
+## 開発ルール
 
-- Keep the default path local-first and deterministic.
-- Do not require external model calls for core tests.
-- Add or update tests for evaluator, catalog, pipeline, and Obsidian behavior changes.
-- Do not commit generated `reports/` output.
-- Do not commit real private conversations, credentials, or user data.
+- 既定経路はローカルファーストかつ決定論的に保つ。
+- コアテストで外部モデル呼び出しを必須にしない。
+- evaluator、catalog、pipeline、Obsidian連携の挙動変更にはテストを追加・更新する。
+- `reports/` の生成物をコミットしない。
+- 実在する非公開会話、認証情報、ユーザーデータをコミットしない。
 
-## Public Data
+## 公開データ
 
-Only use sample data that is synthetic, explicitly licensed, or otherwise safe to redistribute.
-
+サンプルには、合成データ、明示的にライセンスされたデータ、または再配布して安全なデータだけを使用してください。
