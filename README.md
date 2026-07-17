@@ -201,4 +201,4 @@ MIT License. See [LICENSE](LICENSE).
 
 ## 公開前の注意
 
-このリポジトリはpublic化を目指せる構成に寄せていますが、公開操作はまだ行っていません。公開前には [docs/public-readiness.md](docs/public-readiness.md) を確認してください。
+このリポジトリはGitHub上にprivateで作成・初回push済みです。public visibilityへの変更、release、告知、外部共有はまだ行っていません。公開前には [docs/public-readiness.md](docs/public-readiness.md) を確認し、人間レビューと明示承認を得てください。
