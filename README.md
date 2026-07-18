@@ -185,6 +185,7 @@ MIT License. See [LICENSE](LICENSE).
 
 ## ドキュメント
 
+- [Repo goal](REPO_GOAL.md)
 - [仕組み完成条件](docs/mechanism-completion.md)
 - [Anthropic型ローカル再現ロードマップ](docs/anthropic-reproduction-roadmap.md)
 - [次元削減](docs/dimensionality-reduction.md)
@@ -202,3 +203,5 @@ MIT License. See [LICENSE](LICENSE).
 ## 公開前の注意
 
 このリポジトリはGitHub上にprivateで作成・初回push済みです。public visibilityへの変更、release、告知、外部共有はまだ行っていません。公開前には [docs/public-readiness.md](docs/public-readiness.md) を確認し、人間レビューと明示承認を得てください。
+
+`repo-operating-contracts` v0.2.0のmanaged bundleを試験導入しています。hookは配置のみで、install / enableしていません。bundle整合性は `python .repo-operating-contracts\check.py` で確認できます。
