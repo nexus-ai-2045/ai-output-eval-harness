@@ -18,7 +18,7 @@
 - secret pattern scan: 全9 commitsをgitleaksで走査し、検出なし（2026-07-17）
 - personal path scan: 全9 commitsと現行tracked filesを走査し、検出なし（2026-07-17）
 - Git履歴の作者情報: `nexus_ai <nexus.ai.2045@gmail.com>` の1種。Web公開可否は人間レビューが必要
-- Repo operating contract: v0.2.0 pilot bundle配置済み。hook / runtime skillは未install
+- Repo operating contract: v0.3.0 pilot bundle配置済み。hook / runtime skillは未install
 
 ## 公開前に必要な判断
 

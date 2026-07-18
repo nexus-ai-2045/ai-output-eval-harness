@@ -21,7 +21,7 @@
 - Secret pattern scan: 全9 commitsをgitleaksで走査し、検出なし（2026-07-17）
 - Personal path scan: 全9 commitsと現行tracked filesを走査し、検出なし（2026-07-17）
 - Generated reports: `.gitignore`対象
-- Repo operating contract: v0.2.0 pilot bundle配置済み、consumer check対応、hook未有効化
+- Repo operating contract: v0.3.0 pilot bundle配置済み、consumer check対応、hook未有効化
 
 ## 人間レビューが必要な項目
 

@@ -50,6 +50,11 @@ def check(root: Path) -> dict[str, object]:
 
     if not (root / "REPO_GOAL.md").exists():
         missing.append("REPO_GOAL.md")
+    agents_path = root / "AGENTS.md"
+    if not agents_path.exists():
+        missing.append("AGENTS.md")
+    elif ".repo-operating-contracts/manifest.json" not in agents_path.read_text(encoding="utf-8"):
+        errors.append("agent_entrypoint_not_integrated")
     if manifest.get("hook_installed") is not False:
         errors.append("hook_install_state_must_be_false")
     if manifest.get("runtime_skill_installed") is not False:

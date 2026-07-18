@@ -6,7 +6,7 @@ current_goal: AI出力評価ハーネスを公開レビュー可能な状態に�
 
 ## 完了レイヤー
 
-- local implementation: `repo-operating-contracts` v0.2.0 pilot bundleとagent入口を配置
+- local implementation: `repo-operating-contracts` v0.3.0 pilot bundleとagent入口を配置
 - local verification: `20 passed`、consumer contract check `ok`、Git identity `matched`
 - branch / commit: `codex/repo-contracts-pilot`のlocal commit（`git log -1`を参照）
 - push / PR: 未実行

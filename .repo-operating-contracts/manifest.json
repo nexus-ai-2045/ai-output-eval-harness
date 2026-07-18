@@ -1,15 +1,16 @@
 {
   "schema": "repo_operating_contracts.adoption.v1",
-  "contract_version": "0.2.0",
+  "contract_version": "0.3.0",
   "source_repository": "nexus-ai-2045/repo-operating-contracts",
   "expected_remote": "nexus-ai-2045/ai-output-eval-harness",
   "managed_files": {
-    ".repo-operating-contracts/check.py": "92946b15c5989cfe2edc78058dc2af1ff8369cca4e890d64fc32ad621ccf8f26",
+    ".repo-operating-contracts/check.py": "abe7abd9f2d2abecb70928c131874e98635b4c7ec6bae805c520e9431a9b6de9",
     ".repo-operating-contracts/repo-operating-hook.v1.md": "18e2d98e7f9064bb13b89f1eb4a038537ee137bc31cba1ca2e2f4338f50927f3",
     ".repo-operating-contracts/side_route_decider.py": "a8e7544be03ba4214ab6e1df6538d84eb0cb932f349b862e4be36c78ff964776",
     ".repo-operating-contracts/workdir_git_identity_check.py": "daf59331851b4baa783e02454ae7f59403ed164a79ff121523f48b8a78531c61"
   },
   "repo_goal_owned_by_consumer": true,
+  "agent_entrypoint_owned_by_consumer": true,
   "hook_installed": false,
   "runtime_skill_installed": false,
   "external_actions_performed": false
