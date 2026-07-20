@@ -32,4 +32,3 @@
 - `continue_here`: repo identityとrepo goalが一致し、安全に継続できる。
 - `suggest_new_chat`: repoまたはgoalが分岐しているため、別taskをすすめる。
 - `stop_for_review`: 公開・外部操作・hook・authなどの停止線、またはGit同一性の不一致がある。
-

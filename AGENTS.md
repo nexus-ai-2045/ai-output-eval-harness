@@ -31,4 +31,3 @@
 python -m pytest -q
 python .repo-operating-contracts\check.py
 ```
-
