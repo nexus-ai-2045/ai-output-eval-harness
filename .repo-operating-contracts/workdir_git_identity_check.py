@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 
+NO_WINDOW = getattr(subprocess, "CREATE_NO_WINDOW", 0)
 Runner = Callable[[list[str], Path], tuple[int, str, str]]
 
 
@@ -18,6 +19,7 @@ def run_command(argv: list[str], cwd: Path) -> tuple[int, str, str]:
         errors="replace",
         capture_output=True,
         check=False,
+        creationflags=NO_WINDOW,
     )
     return completed.returncode, completed.stdout.strip(), completed.stderr.strip()
 
