@@ -13,10 +13,12 @@
 - LICENSE: MIT
 - Versioning: `pyproject.toml` をSSOTにした `version` コマンドあり
 - 生成物: `reports/` は `.gitignore` 対象
-- GitHub作成/push/public化: 未実施
-- secret pattern scan: 検出なし（2026-07-16）
-- personal path scan: 検出なし（2026-07-16）
-- Git履歴の作者情報: 個人名義を含むため、人間レビューが必要
+- GitHub作成/push: `nexus-ai-2045/ai-output-eval-harness` へprivateで実施済み
+- public visibility変更/release/告知/外部共有: 未実施
+- secret pattern scan: 全9 commitsをgitleaksで走査し、検出なし（2026-07-17）
+- personal path scan: 全9 commitsと現行tracked filesを走査し、検出なし（2026-07-17）
+- Git履歴の作者情報: `nexus_ai <nexus.ai.2045@gmail.com>` の1種。Web公開可否は人間レビューが必要
+- Repo operating contract: v0.3.0 pilot bundle配置済み。hook / runtime skillは未install
 
 ## 公開前に必要な判断
 
@@ -27,6 +29,7 @@
 ## 公開前チェック
 
 - `python -m pytest`
+- `python .repo-operating-contracts\check.py`
 - secret scan
 - personal path scan
 - `reports/` やローカル生成物が追跡されていないこと
@@ -36,4 +39,4 @@
 
 ## 人間レビュー境界
 
-repository作成、push、visibility変更、public化、外部共有は、現在会話で対象repoと操作を明示して人間レビュー後に行う。
+private repositoryの作成と初回pushは完了済み。今後の追加push、visibility変更、public化、release、外部共有は、現在会話で対象repo、外から見える内容、正確な操作を明示し、人間レビューと承認を得た後に行う。
