@@ -1,8 +1,8 @@
-# Anthropic型ローカル再現ロードマップ
+# 公開研究を参考にしたローカル分析ロードマップ
 
 ## ゴール
 
-元記事の研究を完全に複製するのではなく、公開情報から再現可能な分析パイプラインをローカルで動かせるようにする。
+Anthropicの[Claude’s values across models and languages](https://www.anthropic.com/research/claude-values-models-languages)を参考に、公開情報から構成できる小規模な分析パイプラインをローカルで動かせるようにする。研究データ、339 values、公式実装を複製するものではない。
 
 ```text
 AI出力データ
@@ -28,7 +28,7 @@ AI出力データ
 
 ## 記事との差分
 
-Anthropic記事では、過去研究の3,307 valuesを339 high-level valuesへまとめ、30万件以上の会話にラベル付けして次元削減している。
+Anthropic記事では、過去研究の3,307 valuesを339 high-level valuesへまとめ、309,815件の会話にラベル付けして次元削減している。
 
 このリポジトリのMVPでは、まず公開情報から再現可能な小規模カタログと決定的ラベル付けで、同じ形のデータ処理を通す。
 

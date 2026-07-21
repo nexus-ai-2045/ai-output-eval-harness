@@ -4,6 +4,8 @@ from collections import defaultdict
 from statistics import mean
 from typing import Any
 
+from ai_output_eval.formatting import markdown_inline
+
 
 GROUP_FIELDS = ("model", "language", "task_type")
 AXIS_FIELDS = ("deference_vs_caution", "warmth_vs_rigor", "depth_vs_brevity", "candor_vs_execution")
@@ -39,13 +41,13 @@ def _group_section(rows: list[dict[str, Any]], group_field: str) -> list[str]:
             "| "
             + " | ".join(
                 [
-                    group,
+                    markdown_inline(group),
                     str(len(group_rows)),
                     f"{axis_means['deference_vs_caution']:.3f}",
                     f"{axis_means['warmth_vs_rigor']:.3f}",
                     f"{axis_means['depth_vs_brevity']:.3f}",
                     f"{axis_means['candor_vs_execution']:.3f}",
-                    ", ".join(top_values) if top_values else "-",
+                    ", ".join(markdown_inline(value_id) for value_id in top_values) if top_values else "-",
                 ]
             )
             + " |"

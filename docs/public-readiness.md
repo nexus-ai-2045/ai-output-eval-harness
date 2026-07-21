@@ -1,42 +1,33 @@
-# 公開準備チェック
+# 公開前チェック
 
-このリポジトリをpublic化する前の確認リストです。
+この文書は、`ai-output-eval-harness` を公開する前に確認する技術項目をまとめたものです。公開先のアカウント、組織内台帳、承認履歴は公開repositoryへ含めません。
 
-## 現在の状態
-
-- ローカル実装: あり
-- テスト: あり
-- README: public向けに整理済み
-- CI: pytest用GitHub Actionsあり
-- SECURITY.md: あり
-- CONTRIBUTING.md: あり
-- LICENSE: MIT
-- Versioning: `pyproject.toml` をSSOTにした `version` コマンドあり
-- 生成物: `reports/` は `.gitignore` 対象
-- GitHub作成/push: `nexus-ai-2045/ai-output-eval-harness` へprivateで実施済み
-- public visibility変更/release/告知/外部共有: 未実施
-- secret pattern scan: 全9 commitsをgitleaksで走査し、検出なし（2026-07-17）
-- personal path scan: 全9 commitsと現行tracked filesを走査し、検出なし（2026-07-17）
-- Git履歴の作者情報: `nexus_ai <nexus.ai.2045@gmail.com>` の1種。Web公開可否は人間レビューが必要
-- Repo operating contract: v0.3.0 pilot bundle配置済み。hook / runtime skillは未install
-
-## 公開前に必要な判断
-
-- サンプルデータを公開してよいか
-- READMEの言語を日本語中心にするか、英語版も併記するか
-- PyPI公開を目指すか、GitHubリポだけにするか
-
-## 公開前チェック
+## 自動確認
 
 - `python -m pytest`
 - `python .repo-operating-contracts\check.py`
-- secret scan
+- packageのeditable install
+- sample inputを使ったpipeline smoke test
+- secret scannerによる現在のファイルと全commit履歴の検査
 - personal path scan
-- `reports/` やローカル生成物が追跡されていないこと
-- GitHub上でSecurity Advisoriesを有効化するか確認
-- GitHub Actionsが新規環境でテスト依存を導入できること
-- release tag運用を決める
+- dependency vulnerability scan
+- GitHub Actionsの実行結果
+- `reports/` とローカル生成物がGit管理対象外であること
 
-## 人間レビュー境界
+## 人間による確認
 
-private repositoryの作成と初回pushは完了済み。今後の追加push、visibility変更、public化、release、外部共有は、現在会話で対象repo、外から見える内容、正確な操作を明示し、人間レビューと承認を得た後に行う。
+- READMEとコマンド例が初めての利用者にも理解できる
+- sample dataが合成データまたは再配布可能なデータだけで構成されている
+- 価値観カタログの出典・制約・ルールベース判定の限界が説明されている
+- commit履歴に個人メール、内部パス、非公開情報がない
+- GitHubのみで配布するか、package registryにも配布するか決定済み
+
+## GitHub設定
+
+- Security Advisoriesとprivate vulnerability reporting
+- dependency alerts
+- default branchとbranch保護
+- pull request reviewとCI成功を必須にする規則
+- release tagの命名とrollback方法
+
+公開操作は、自動検査と人間確認の両方が完了し、対象repositoryと正確な操作について明示承認を得た後に行います。

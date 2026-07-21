@@ -4,6 +4,7 @@ from math import sqrt
 from typing import Any
 
 from ai_output_eval.catalog import ValueDefinition
+from ai_output_eval.formatting import markdown_inline
 
 
 def reduce_value_matrix(
@@ -80,7 +81,7 @@ def reduction_report(result: dict[str, Any]) -> str:
         )
         for loading in component["top_loadings"]:
             lines.append(
-                f"| {loading['value_id']} | {loading['loading']:.6f} | {loading['mean_presence']:.6f} |"
+                f"| {markdown_inline(loading['value_id'])} | {loading['loading']:.6f} | {loading['mean_presence']:.6f} |"
             )
         lines.append("")
     return "\n".join(lines) + "\n"

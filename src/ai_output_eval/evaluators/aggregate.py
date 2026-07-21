@@ -3,6 +3,8 @@ from __future__ import annotations
 from statistics import mean
 from typing import Any
 
+from ai_output_eval.formatting import markdown_inline
+
 
 def summarize_results(rows: list[dict[str, Any]]) -> str:
     total = len(rows)
@@ -41,7 +43,10 @@ def summarize_results(rows: list[dict[str, Any]]) -> str:
         lines.append("No failures.")
     else:
         for row in failures:
-            lines.append(f"- {row.get('case_id')}: accuracy={row.get('field_accuracy')}, unsupported={len(row.get('unsupported_claims', []))}")
+            lines.append(
+                f"- {markdown_inline(row.get('case_id', ''))}: "
+                f"accuracy={row.get('field_accuracy')}, unsupported={len(row.get('unsupported_claims', []))}"
+            )
 
     return "\n".join(lines) + "\n"
 

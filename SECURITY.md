@@ -8,7 +8,7 @@
 
 メンテナーが確認する前に、脆弱性の疑いを公開しないでください。
 
-現時点では、リポジトリ所有者が案内する非公開経路から報告してください。GitHub Security Advisoriesを有効化した後は、その非公開報告機能を使用してください。
+GitHub Security Advisoriesのprivate vulnerability reportを利用できる場合は、その経路を使用してください。利用できない場合は、機密情報を公開せず、repository ownerへ非公開報告経路の案内を求めてください。
 
 ## データの取り扱い
 

@@ -47,4 +47,10 @@ def write_csv(path: Path, columns: list[str], rows: Iterable[dict[str, Any]]) ->
         writer = csv.DictWriter(fh, fieldnames=columns)
         writer.writeheader()
         for row in rows:
-            writer.writerow(row)
+            writer.writerow({column: _safe_csv_cell(row.get(column, "")) for column in columns})
+
+
+def _safe_csv_cell(value: Any) -> Any:
+    if isinstance(value, str) and value.startswith(("=", "+", "-", "@")):
+        return "'" + value
+    return value

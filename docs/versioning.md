@@ -2,7 +2,7 @@
 
 ## 方針
 
-バージョンのSSOTは `pyproject.toml` の `[project].version` です。
+バージョンは `pyproject.toml` の `[project].version` で一元管理します。
 
 コード側では `ai_output_eval.version.get_version()` がインストール済みパッケージメタデータを優先し、未インストール実行では `pyproject.toml` を読みます。
 
