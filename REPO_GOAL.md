@@ -9,8 +9,8 @@ current_goal: AI出力評価ハーネスを公開レビュー可能な状態に�
 - local implementation: コアMVPと出力注入対策、`repo-operating-contracts` v0.4.2 bundleを配置
 - local verification: `22 passed`、dependency audit脆弱性なし、consumer contract check `ok`、Git identity `matched`
 - branch / commit: `main`に公開候補commitを作成（`git log -1`を参照）
-- push / PR: 未実行
-- merge / external state: 未実行
+- push / PR: `main`へpush済み、GitHub Actions成功
+- merge / external state: repositoryはprivateを維持
 - cleanup: 専用worktreeを維持
 - unrelated dirty state: なし
 
@@ -28,4 +28,4 @@ current_goal: AI出力評価ハーネスを公開レビュー可能な状態に�
 - changed files: `AGENTS.md`、`REPO_GOAL.md`、README、managed bundle
 - verification: `python -m pytest -q`、`python .repo-operating-contracts\check.py`、Git identity check
 - external actions performed: false
-- remaining risks: 現在commitのGitHub Actions、visibility変更、hook install / runtime skill installは未完了
+- remaining risks: visibility変更、hook install / runtime skill installは未完了
