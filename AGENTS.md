@@ -29,5 +29,6 @@
 
 ```powershell
 python -m pytest -q
+python -m pytest -q tests/test_japanese_docs.py
 python .repo-operating-contracts\check.py
 ```

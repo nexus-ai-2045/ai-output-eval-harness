@@ -1,4 +1,4 @@
-# Versioning
+# バージョン管理
 
 ## 方針
 
@@ -11,12 +11,12 @@
 - `python -m ai_output_eval version`
 - `ai_output_eval.__version__`
 - `pipeline` が生成する `manifest.json` の `tool_version`
-- READMEの `Current version`
+- READMEの「現在のバージョン」
 
 ## 更新手順
 
 1. `pyproject.toml` の `version` を更新する
-2. READMEの `Current version` を同じ値に更新する
+2. READMEの「現在のバージョン」を同じ値に更新する
 3. `python -m ai_output_eval version` を確認する
 4. `python -m pytest` を実行する
 
