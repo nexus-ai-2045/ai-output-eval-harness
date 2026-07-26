@@ -2,7 +2,7 @@
 
 リポジトリ: ai-output-eval-harness
 所有者: nexus-ai-2045
-現在の目標: コアMVPのv0.1.0リリースを完了し、公開状態を正本へ反映する
+現在の目標: 公開済みv0.1.0を安定運用し、変更をPRとCI経由でmainへ反映する
 
 ## 測定メタデータ
 
@@ -19,7 +19,7 @@
 
 - ローカル実装: コアMVPと出力注入対策、`repo-operating-contracts` v0.4.2の管理対象ファイル一式を配置
 - ローカル検証: `27 passed`、日本語文書ゲート `3 passed`、actionlint成功、wheel build成功、wheel導入後のCLI smoke成功、依存関係監査で脆弱性なし、利用側契約検査 `ok`
-- ブランチ／コミット: PR #2をrebase mergeし、公開mainは`a0cd421`
+- ブランチ／コミット: PR #2をrebase mergeし、v0.1.0 tagは`a0cd421`を指す
 - push／PR: PR #2のCIとCodeQLが成功し、merge済み
 - merge／外部状態: `v0.1.0`tagとGitHub Releaseを公開し、GitHub未ログイン状態から閲覧可能。`main-pr-and-ci` rulesetを有効化
 - 後片付け: 専用worktreeを維持
