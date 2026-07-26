@@ -15,7 +15,7 @@
 
 `public / v0.1.0_released / main_ruleset_active`
 
-2026-07-26（日本時間）にv0.1.0をリリースしました。tagは公開mainの`a0cd421`を指し、GitHub ReleaseはGitHub未ログイン状態から閲覧できることを確認しています。
+2026-07-26（日本時間）にv0.1.0をリリースしました。tagは`a0cd421`を指し、GitHub ReleaseはGitHub未ログイン状態から閲覧できることを確認しています。現在のmainは、GitHub ActionsのCIとCodeQLで継続確認します。
 
 ## 確認済み
 
@@ -35,7 +35,7 @@
 - [x] コミット履歴の公開用識別情報レビュー
 - [x] README、ソース、テスト、サンプルデータの人間レビュー
 - [x] リポジトリ運用契約検査、フック未有効化
-- [x] 現在の公開HEAD `a0cd421` のGitHub Actions成功
+- [x] v0.1.0 tag対象commit `a0cd421` のGitHub Actions成功
 - [x] リポジトリの可視性: `PUBLIC`
 - [x] GitHub未ログイン状態から閲覧可能: リポジトリ、README、LICENSE、SECURITY.md、PUBLIC_READY.mdでHTTP 200
 
