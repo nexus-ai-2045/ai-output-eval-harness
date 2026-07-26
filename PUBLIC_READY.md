@@ -3,17 +3,17 @@
 ## 測定メタデータ
 
 - `schema_version`: `fact-provenance/v1`
-- `recorded_at`: `2026-07-26T10:41:44+09:00`
+- `recorded_at`: `2026-07-26T10:51:07+09:00`
 - `recorded_by`: `codex`
-- `source`: GitHub API、GitHub Actions、GitHub未ログイン状態でのHTTPアクセス、ローカルGit
+- `source`: GitHub API、GitHub Actions、GitHub ruleset API、GitHub未ログイン状態でのHTTPアクセス、ローカルGit
 - `actor`: `nexus-ai-2045`、GitHub Actions、`codex`
-- `event_time`: `2026-07-26T10:35:34+09:00`から`2026-07-26T10:40:24+09:00`
-- `observed_at`: `2026-07-26T10:41:44+09:00`
+- `event_time`: `2026-07-26T10:35:34+09:00`から`2026-07-26T10:50:55+09:00`
+- `observed_at`: `2026-07-26T10:51:07+09:00`
 - `scope`: `nexus-ai-2045/ai-output-eval-harness` v0.1.0
 
 ## 現在の判定
 
-`public / v0.1.0_released / branch_protection_pending`
+`public / v0.1.0_released / main_ruleset_active`
 
 2026-07-26（日本時間）にv0.1.0をリリースしました。tagは公開mainの`a0cd421`を指し、GitHub ReleaseはGitHub未ログイン状態から閲覧できることを確認しています。
 
@@ -45,7 +45,7 @@
 - [x] 脆弱性アラート／Dependabotセキュリティ更新
 - [x] 機密情報スキャン／push protection
 - [x] CodeQL open alert: `0`
-- [ ] `main`のブランチ保護またはルールセット
+- [x] `main-pr-and-ci` ruleset（PR、CI最新化、5チェック、削除／force push禁止、bypassなし）
 
 ## 公開時に見えるもの
 
@@ -53,4 +53,4 @@
 
 ## 未完了項目
 
-`main`のbranch protectionまたはrulesetは未設定です。追加リリース、告知、外部共有、branch削除は、それぞれ正確な操作を提示して明示承認を得るまで行いません。
+追加リリース、告知、外部共有、branch削除は、それぞれ正確な操作を提示して明示承認を得るまで行いません。

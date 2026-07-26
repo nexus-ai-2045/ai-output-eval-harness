@@ -7,12 +7,12 @@
 ## 測定メタデータ
 
 - `schema_version`: `fact-provenance/v1`
-- `recorded_at`: `2026-07-26T10:41:44+09:00`
+- `recorded_at`: `2026-07-26T10:51:07+09:00`
 - `recorded_by`: `codex`
-- `source`: GitHub API、GitHub Actions、GitHub未ログイン状態でのHTTPアクセス、ローカルGit
+- `source`: GitHub API、GitHub Actions、GitHub ruleset API、GitHub未ログイン状態でのHTTPアクセス、ローカルGit
 - `actor`: `nexus-ai-2045`、GitHub Actions、`codex`
-- `event_time`: `2026-07-26T10:35:34+09:00`から`2026-07-26T10:40:24+09:00`
-- `observed_at`: `2026-07-26T10:41:44+09:00`
+- `event_time`: `2026-07-26T10:35:34+09:00`から`2026-07-26T10:50:55+09:00`
+- `observed_at`: `2026-07-26T10:51:07+09:00`
 - `scope`: `nexus-ai-2045/ai-output-eval-harness` v0.1.0
 
 ## 完了レイヤー
@@ -21,7 +21,7 @@
 - ローカル検証: `27 passed`、日本語文書ゲート `3 passed`、actionlint成功、wheel build成功、wheel導入後のCLI smoke成功、依存関係監査で脆弱性なし、利用側契約検査 `ok`
 - ブランチ／コミット: PR #2をrebase mergeし、公開mainは`a0cd421`
 - push／PR: PR #2のCIとCodeQLが成功し、merge済み
-- merge／外部状態: `v0.1.0`tagとGitHub Releaseを公開し、GitHub未ログイン状態から閲覧可能
+- merge／外部状態: `v0.1.0`tagとGitHub Releaseを公開し、GitHub未ログイン状態から閲覧可能。`main-pr-and-ci` rulesetを有効化
 - 後片付け: 専用worktreeを維持
 - 無関係な未コミット変更: なし
 
@@ -39,4 +39,4 @@
 - 変更ファイル: 公開準備文書とREPO_GOALのリリース後状態
 - 検証: pytest、actionlint、wheel build、CLI smoke、利用側契約検査、依存関係監査、gitleaks、個人パス検査
 - 実行済みの外部操作: PR #2のrebase merge、`v0.1.0`tag push、GitHub Release公開
-- 残存リスク: branch protection、作業branchの削除、告知、フック／実行時スキルのインストールは未完了
+- 残存リスク: 作業branchの削除、告知、フック／実行時スキルのインストールは未完了
