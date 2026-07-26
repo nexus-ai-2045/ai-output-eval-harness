@@ -2,6 +2,10 @@
 
 AI出力のJSONLをローカルで評価し、結果をJSONL・Markdown・CSVで保存するコマンドラインツールです。外部APIは使いません。
 
+> **着想元:** Anthropicの研究記事 [Claude’s values across models and languages](https://www.anthropic.com/research/claude-values-models-languages)。このリポジトリは独立した小規模実装であり、Anthropicの公式実装・公式データ・研究結果の再現ではありません。
+
+> **本実装で加えた工夫:** 評価結果をJSONL・Markdown・CSVで手元に残し、任意でObsidianへ整理できます。CSV数式注入とMarkdown構造注入にも対策しています。Obsidianはコア評価には不要です。
+
 - 期待値との一致率
 - 根拠にない出力
 - 信頼度（`confidence`）の低い項目
@@ -75,6 +79,7 @@ python .repo-operating-contracts\check.py
 - [コントリビューションガイド](CONTRIBUTING.md)
 - [セキュリティポリシー](SECURITY.md)
 - [公開準備チェック](docs/public-readiness.md)
+- [v0.1.0 リリースノート](docs/releases/v0.1.0.md)
 - [その他のドキュメント](docs/)
 
 ## ライセンス

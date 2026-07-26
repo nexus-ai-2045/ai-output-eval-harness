@@ -2,15 +2,15 @@
 
 リポジトリ: ai-output-eval-harness
 所有者: nexus-ai-2045
-現在の目標: 公開済みAI出力評価ハーネスのセキュリティ設定と公開後検証を完了する
+現在の目標: コアMVPのv0.1.0リリース候補を人間レビュー可能な状態にする
 
 ## 完了レイヤー
 
 - ローカル実装: コアMVPと出力注入対策、`repo-operating-contracts` v0.4.2の管理対象ファイル一式を配置
-- ローカル検証: `26 passed`、日本語文書ゲート `3 passed`、CI権限ゲート `1 passed`、依存関係監査で脆弱性なし、利用側契約検査 `ok`、Git識別情報 `matched`
-- ブランチ／コミット: `main`に公開候補コミットを作成（`git log -1`を参照）
-- push／PR: `main`へpush済み、GitHub Actions成功
-- merge／外部状態: リポジトリはpublic、匿名Webアクセス確認済み
+- ローカル検証: `27 passed`、日本語文書ゲート `3 passed`、actionlint成功、wheel build成功、wheel導入後のCLI smoke成功、依存関係監査で脆弱性なし、利用側契約検査 `ok`
+- ブランチ／コミット: `codex/release-v0.1.0-readiness`に未コミットのリリース候補
+- push／PR: リリース候補は未push、PR未作成
+- merge／外部状態: リポジトリはpublic。公開HEADは`11f4f278`、v0.1.0のtagとGitHub Releaseは未作成
 - 後片付け: 専用worktreeを維持
 - 無関係な未コミット変更: なし
 
@@ -24,8 +24,8 @@
 
 ## 根拠
 
-- Git状態: `main`のローカル2コミットを起点に専用ブランチを作成
-- 変更ファイル: `AGENTS.md`、`REPO_GOAL.md`、README、管理対象ファイル一式
-- 検証: `python -m pytest -q`、`python .repo-operating-contracts\check.py`、Git識別情報検査
-- 実行済みの外部操作: リポジトリの可視性を承認済み操作でpublicへ変更
-- 残存リスク: CodeQLの再解析によるmediumアラート解消確認、branch protection、フック／実行時スキルのインストールは未完了
+- Git状態: 公開済み`main`と同期した専用ブランチで作業
+- 変更ファイル: CI、README、公開準備文書、リリースノート、リリースメタデータテスト
+- 検証: pytest、actionlint、wheel build、CLI smoke、利用側契約検査、依存関係監査、gitleaks、個人パス検査
+- 実行済みの外部操作: このリリース候補についてはなし
+- 残存リスク: 人間レビュー、PR上のCI、branch protection、merge、tag、GitHub Releaseは未完了
