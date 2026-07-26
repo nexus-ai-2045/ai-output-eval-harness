@@ -10,6 +10,23 @@ permissions:
   contents: read
 
 jobs:
+  actionlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: GitHub Actions設定を検査
+        env:
+          ACTIONLINT_VERSION: "1.7.12"
+          ACTIONLINT_ARCHIVE_SHA256: "8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8"
+        run: |
+          archive="actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz"
+          curl --fail --location --silent --show-error \
+            "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/${archive}" \
+            --output "${archive}"
+          echo "${ACTIONLINT_ARCHIVE_SHA256}  ${archive}" | sha256sum --check -
+          tar --extract --gzip --file "${archive}" actionlint
+          ./actionlint
+
   test:
     runs-on: ubuntu-latest
     strategy:
@@ -26,3 +43,20 @@ jobs:
         run: python -m pip install -e ".[test]"
       - name: テストを実行
         run: python -m pytest
+      - name: 運用契約のdriftを検査
+        run: python .repo-operating-contracts/check.py
+      - name: wheelをビルド
+        run: python -m pip wheel . --no-deps --wheel-dir "${RUNNER_TEMP}/wheels"
+      - name: CLIを簡易動作確認
+        run: |
+          python -m pip install --force-reinstall "${RUNNER_TEMP}"/wheels/*.whl
+          mkdir --parents "${RUNNER_TEMP}/reports"
+          ai-eval version
+          ai-eval run \
+            --input examples/sample-output.jsonl \
+            --out "${RUNNER_TEMP}/reports/eval.jsonl"
+          ai-eval summarize \
+            --input "${RUNNER_TEMP}/reports/eval.jsonl" \
+            --out "${RUNNER_TEMP}/reports/summary.md"
+          test -s "${RUNNER_TEMP}/reports/eval.jsonl"
+          test -s "${RUNNER_TEMP}/reports/summary.md"

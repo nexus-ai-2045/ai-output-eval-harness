@@ -6,8 +6,10 @@
 
 - `python -m pytest`
 - `python .repo-operating-contracts\check.py`
+- actionlintによるGitHub Actions設定の検査
+- wheelのビルドと隔離環境へのインストール
 - パッケージの編集可能形式でのインストール
-- サンプル入力を使ったパイプラインの簡易動作確認
+- wheelから導入したCLIとサンプル入力を使った簡易動作確認
 - 機密情報スキャナーによる現在のファイルと全コミット履歴の検査
 - 個人環境パス検査
 - 依存関係の脆弱性検査
