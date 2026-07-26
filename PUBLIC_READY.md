@@ -1,10 +1,21 @@
 # 公開準備状況
 
+## 測定メタデータ
+
+- `schema_version`: `fact-provenance/v1`
+- `recorded_at`: `2026-07-26T10:41:44+09:00`
+- `recorded_by`: `codex`
+- `source`: GitHub API、GitHub Actions、GitHub未ログイン状態でのHTTPアクセス、ローカルGit
+- `actor`: `nexus-ai-2045`、GitHub Actions、`codex`
+- `event_time`: `2026-07-26T10:35:34+09:00`から`2026-07-26T10:40:24+09:00`
+- `observed_at`: `2026-07-26T10:41:44+09:00`
+- `scope`: `nexus-ai-2045/ai-output-eval-harness` v0.1.0
+
 ## 現在の判定
 
-`public / v0.1.0_release_candidate / human_review_required / branch_protection_pending`
+`public / v0.1.0_released / branch_protection_pending`
 
-2026-07-26（日本時間）時点でリポジトリはpublicです。v0.1.0候補はローカルブランチだけにあり、push、PR、tag、GitHub Releaseは未実施です。
+2026-07-26（日本時間）にv0.1.0をリリースしました。tagは公開mainの`a0cd421`を指し、GitHub ReleaseはGitHub未ログイン状態から閲覧できることを確認しています。
 
 ## 確認済み
 
@@ -24,9 +35,9 @@
 - [x] コミット履歴の公開用識別情報レビュー
 - [x] README、ソース、テスト、サンプルデータの人間レビュー
 - [x] リポジトリ運用契約検査、フック未有効化
-- [x] 現在の公開HEAD `11f4f278` のGitHub Actions成功
+- [x] 現在の公開HEAD `a0cd421` のGitHub Actions成功
 - [x] リポジトリの可視性: `PUBLIC`
-- [x] 匿名Webアクセス: リポジトリ、README、LICENSE、SECURITY.md、PUBLIC_READY.mdでHTTP 200
+- [x] GitHub未ログイン状態から閲覧可能: リポジトリ、README、LICENSE、SECURITY.md、PUBLIC_READY.mdでHTTP 200
 
 ## 公開後に必要な確認
 
@@ -38,8 +49,8 @@
 
 ## 公開時に見えるもの
 
-現在、ソース、テスト、スキーマ、サンプルデータ、価値観カタログ、ドキュメント、全コミット履歴、コミット作成者情報がWebから見えます。リリースすると、加えて`v0.1.0`タグ、リリース名、リリースノートが見えるようになります。
+現在、ソース、テスト、スキーマ、サンプルデータ、価値観カタログ、ドキュメント、全コミット履歴、コミット作成者情報、`v0.1.0`tag、リリース名、リリースノートがWebから見えます。
 
 ## 未完了項目
 
-v0.1.0候補の人間レビュー、PRのCI、merge、tag、GitHub Releaseは未完了です。push、PR、merge、tag、リリース、告知、外部共有は、それぞれ正確な操作を提示して明示承認を得るまで行いません。
+`main`のbranch protectionまたはrulesetは未設定です。追加リリース、告知、外部共有、branch削除は、それぞれ正確な操作を提示して明示承認を得るまで行いません。
