@@ -1,13 +1,14 @@
 {
   "schema": "repo_operating_contracts.adoption.v1",
   "contract_version": "0.4.2",
+  "consumer_patch": "security-findings-fail-closed.1",
   "source_repository": "nexus-ai-2045/repo-operating-contracts",
   "expected_remote": "nexus-ai-2045/ai-output-eval-harness",
   "managed_files": {
     ".repo-operating-contracts/check.py": "abe7abd9f2d2abecb70928c131874e98635b4c7ec6bae805c520e9431a9b6de9",
     ".repo-operating-contracts/repo-operating-hook.v1.md": "0560bdf576e43c2e30f039e7fcc27ceeb037e7a5c701cc0326e05bc2474acf5d",
-    ".repo-operating-contracts/side_route_decider.py": "34699afa6d0eac465aec57e2cf6b97d33e24af4761fcc20a859d5dac71ccc8de",
-    ".repo-operating-contracts/workdir_git_identity_check.py": "d5494a07e02f8a3356b4400b06300d53d654ee1b827b8c562d68d35015beddd5"
+    ".repo-operating-contracts/side_route_decider.py": "93d5d6dc75952d520ed272d846c6c3a0caae54d8bec8113e8b08eef11fd84a32",
+    ".repo-operating-contracts/workdir_git_identity_check.py": "d25984025a698fb7c1b24a5687745f2854da7c3d3c5f796cd86326e92d51d446"
   },
   "repo_goal_owned_by_consumer": true,
   "agent_entrypoint_owned_by_consumer": true,
