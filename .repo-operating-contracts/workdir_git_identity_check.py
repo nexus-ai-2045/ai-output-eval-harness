@@ -4,6 +4,7 @@ import re
 import subprocess
 from pathlib import Path
 from typing import Any, Callable
+from urllib.parse import urlparse
 
 
 NO_WINDOW = getattr(subprocess, "CREATE_NO_WINDOW", 0)
@@ -84,12 +85,34 @@ def _sync_state(upstream: str | None, ahead: int | None, behind: int | None) -> 
     return "synced"
 
 
+def _github_remote_matches(remote_url: str, expected_path: str) -> bool:
+    if "://" in remote_url:
+        parsed = urlparse(remote_url)
+        host = parsed.hostname or ""
+        path = parsed.path
+    else:
+        scp_match = re.fullmatch(r"(?:[^@]+@)?([^:]+):(.+)", remote_url)
+        if not scp_match:
+            return False
+        host, path = scp_match.groups()
+
+    normalized_path = path.strip("/")
+    if normalized_path.lower().endswith(".git"):
+        normalized_path = normalized_path[:-4]
+    return host.casefold() == "github.com" and normalized_path.casefold() == expected_path
+
+
 def _remote_repo_matches(remotes: str, expected_owner: str, expected_repo: str) -> bool:
     if not remotes or not expected_repo:
         return False
-    owner_prefix = f"{re.escape(expected_owner)}/" if expected_owner else ""
-    pattern = rf"(?:[:/]){owner_prefix}{re.escape(expected_repo)}(?:\.git)?(?:\s|$)"
-    return re.search(pattern, remotes, flags=re.IGNORECASE) is not None
+
+    expected_path = "/".join(part for part in (expected_owner, expected_repo) if part).casefold()
+    origin_urls = []
+    for line in remotes.splitlines():
+        parts = line.split()
+        if len(parts) >= 2 and parts[0] == "origin":
+            origin_urls.append(parts[1])
+    return bool(origin_urls) and all(_github_remote_matches(url, expected_path) for url in origin_urls)
 
 
 def check_workdir_identity(
@@ -119,15 +142,12 @@ def check_workdir_identity(
 
     root_text = root or ""
     remotes_text = remotes or ""
-    repo_match = bool(expected_repo and expected_repo.lower() in root_text.lower()) or _remote_repo_matches(
-        remotes_text, expected_owner, expected_repo
-    )
-    owner_match = not expected_owner or expected_owner.lower() in remotes_text.lower()
+    remote_match = _remote_repo_matches(remotes_text, expected_owner, expected_repo)
     hint_match = not expected_root_hint or expected_root_hint.replace("\\", "/").lower() in root_text.replace("\\", "/").lower()
 
-    if not root:
+    if not root or not remotes:
         repo_identity = "unknown"
-    elif repo_match and owner_match and hint_match:
+    elif remote_match and hint_match:
         repo_identity = "matched"
     else:
         repo_identity = "mismatched"
@@ -197,7 +217,7 @@ def main() -> int:
         allow_no_upstream=args.allow_no_upstream,
     )
     print(json.dumps(result, ensure_ascii=False, indent=2))
-    return 0
+    return 0 if result["recommendation"] == "continue_here" else 2
 
 
 if __name__ == "__main__":
