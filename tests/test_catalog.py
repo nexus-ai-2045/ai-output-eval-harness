@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 
+import pytest
+
 import ai_output_eval
 from ai_output_eval.catalog import DEFAULT_CATALOG_PATH, load_catalog
 
@@ -77,3 +79,28 @@ def test_default_catalog_is_shipped_inside_the_package():
 
     assert DEFAULT_CATALOG_PATH.is_relative_to(package_root)
     assert load_catalog()
+
+
+def test_catalog_rejects_reserved_value_ids(tmp_path):
+    path = tmp_path / "catalog.json"
+    path.write_text(
+        json.dumps(
+            {
+                "values": [
+                    {
+                        "id": "model",
+                        "label": "A",
+                        "ja_label": "A",
+                        "cluster": "rigor",
+                        "axis": "warmth_vs_rigor",
+                        "pole": "rigor",
+                        "keywords": ["a"],
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(ValueError, match="reserved value ids"):
+        load_catalog(path)

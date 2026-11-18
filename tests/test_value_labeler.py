@@ -38,3 +38,19 @@ def test_value_matrix_rows_emits_case_by_value_columns():
     assert "accuracy" in columns
     assert rows[0]["accuracy"] == 1
     assert rows[0]["encouragement"] == 0
+
+
+def test_label_values_ignores_prompt_and_notes_text():
+    catalog = load_catalog()
+
+    labels = label_values(
+        {
+            "case_id": "prompt-only",
+            "prompt": "Please verify accuracy and safety",
+            "notes": "accuracy",
+            "output": "OK",
+        },
+        catalog,
+    )
+
+    assert labels["value_ids"] == []

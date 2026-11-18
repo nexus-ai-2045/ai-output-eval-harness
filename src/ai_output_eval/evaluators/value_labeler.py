@@ -17,9 +17,8 @@ AXES = (
 
 def case_text(case: dict[str, Any]) -> str:
     parts: list[str] = []
-    for key in ("prompt", "input", "output", "rationale", "notes"):
-        if key in case:
-            parts.extend(value for _, value in flatten_values(case[key]))
+    if "output" in case:
+        parts.extend(value for _, value in flatten_values(case["output"]))
     return "\n".join(parts).lower()
 
 

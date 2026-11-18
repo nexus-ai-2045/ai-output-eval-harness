@@ -7,6 +7,7 @@ from typing import Any
 
 
 DEFAULT_CATALOG_PATH = Path(__file__).resolve().parent / "catalogs" / "values_catalog.json"
+RESERVED_VALUE_IDS = frozenset({"case_id", "model", "language", "task_type"})
 VALID_AXIS_POLES = {
     "deference_vs_caution": {"deference", "caution"},
     "warmth_vs_rigor": {"warmth", "rigor"},
@@ -63,6 +64,9 @@ def _validate_catalog(values: list[ValueDefinition], catalog_path: Path) -> None
     duplicates = sorted({value_id for value_id in ids if ids.count(value_id) > 1})
     if duplicates:
         raise ValueError(f"{catalog_path}: duplicate value ids: {', '.join(duplicates)}")
+    reserved = sorted(RESERVED_VALUE_IDS.intersection(ids))
+    if reserved:
+        raise ValueError(f"{catalog_path}: reserved value ids: {', '.join(reserved)}")
     for value in values:
         allowed_poles = VALID_AXIS_POLES.get(value.axis)
         if allowed_poles is None:
