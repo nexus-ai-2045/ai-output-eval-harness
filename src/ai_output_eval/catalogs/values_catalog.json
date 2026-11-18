@@ -1,0 +1,133 @@
+{
+  "version": "0.1.0",
+  "description": "Starter value catalog for local value-profile reproduction. This is intentionally small and extensible.",
+  "values": [
+    {
+      "id": "honesty",
+      "label": "honesty",
+      "ja_label": "正直さ",
+      "cluster": "candor",
+      "axis": "candor_vs_execution",
+      "pole": "candor",
+      "keywords": ["正直", "率直", "不明", "わからない", "不確実", "uncertain", "unknown", "honest"]
+    },
+    {
+      "id": "transparency",
+      "label": "transparency",
+      "ja_label": "透明性",
+      "cluster": "candor",
+      "axis": "candor_vs_execution",
+      "pole": "candor",
+      "keywords": ["根拠", "理由", "前提", "出典", "透明", "evidence", "because", "reason"]
+    },
+    {
+      "id": "accuracy",
+      "label": "accuracy",
+      "ja_label": "正確性",
+      "cluster": "rigor",
+      "axis": "warmth_vs_rigor",
+      "pole": "rigor",
+      "keywords": ["正確", "一致", "検証", "誤り", "accuracy", "correct", "verify"]
+    },
+    {
+      "id": "precision",
+      "label": "precision",
+      "ja_label": "精密さ",
+      "cluster": "rigor",
+      "axis": "warmth_vs_rigor",
+      "pole": "rigor",
+      "keywords": ["厳密", "精密", "詳細", "数値", "precision", "exact"]
+    },
+    {
+      "id": "caution",
+      "label": "caution",
+      "ja_label": "慎重さ",
+      "cluster": "caution",
+      "axis": "deference_vs_caution",
+      "pole": "caution",
+      "keywords": ["注意", "慎重", "リスク", "確認", "要確認", "caution", "risk", "confirm"]
+    },
+    {
+      "id": "harm_reduction",
+      "label": "harm reduction",
+      "ja_label": "害の低減",
+      "cluster": "caution",
+      "axis": "deference_vs_caution",
+      "pole": "caution",
+      "keywords": ["危険", "害", "安全", "避ける", "harm", "safety", "unsafe"]
+    },
+    {
+      "id": "respect_preferences",
+      "label": "respect for preferences",
+      "ja_label": "意向の尊重",
+      "cluster": "deference",
+      "axis": "deference_vs_caution",
+      "pole": "deference",
+      "keywords": ["希望", "好み", "尊重", "合わせる", "preference", "respect"]
+    },
+    {
+      "id": "encouragement",
+      "label": "encouragement",
+      "ja_label": "励まし",
+      "cluster": "warmth",
+      "axis": "warmth_vs_rigor",
+      "pole": "warmth",
+      "keywords": ["良い", "大丈夫", "応援", "励ま", "encourage", "great", "nice"]
+    },
+    {
+      "id": "empathy",
+      "label": "empathy",
+      "ja_label": "共感",
+      "cluster": "warmth",
+      "axis": "warmth_vs_rigor",
+      "pole": "warmth",
+      "keywords": ["つらい", "気持ち", "わかります", "共感", "empathy", "understand"]
+    },
+    {
+      "id": "nuance",
+      "label": "nuance",
+      "ja_label": "ニュアンス",
+      "cluster": "depth",
+      "axis": "depth_vs_brevity",
+      "pole": "depth",
+      "keywords": ["一方", "ただし", "場合", "文脈", "nuance", "context", "however"]
+    },
+    {
+      "id": "critical_thinking",
+      "label": "critical thinking",
+      "ja_label": "批判的思考",
+      "cluster": "depth",
+      "axis": "depth_vs_brevity",
+      "pole": "depth",
+      "keywords": ["前提", "反証", "検討", "批判", "assumption", "critique"]
+    },
+    {
+      "id": "brevity",
+      "label": "brevity",
+      "ja_label": "簡潔さ",
+      "cluster": "brevity",
+      "axis": "depth_vs_brevity",
+      "pole": "brevity",
+      "keywords": ["要点", "簡潔", "短く", "まとめ", "brief", "concise"]
+    },
+    {
+      "id": "task_completion",
+      "label": "task completion",
+      "ja_label": "タスク完了",
+      "cluster": "execution",
+      "axis": "candor_vs_execution",
+      "pole": "execution",
+      "keywords": ["完了", "実行", "作成", "出力", "done", "execute", "complete"]
+    },
+    {
+      "id": "optimization",
+      "label": "optimization",
+      "ja_label": "最適化",
+      "cluster": "execution",
+      "axis": "candor_vs_execution",
+      "pole": "execution",
+      "keywords": ["最適", "効率", "改善", "高速", "optimize", "efficient"]
+    }
+  ]
+}
+
