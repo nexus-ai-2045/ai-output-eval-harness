@@ -48,21 +48,24 @@ def build_obsidian_note(
     return "\n".join(sections).rstrip() + "\n"
 
 
-def resolve_obsidian_output(*, out: Path | None, vault_dir: Path | None, note_path: str | None) -> Path:
+def resolve_obsidian_output(
+    *, out: Path | None, vault_dir: Path | None, note_path: str | None, suffix: str = ".md"
+) -> Path:
     if vault_dir is None:
         if out is None:
             raise ValueError("--out is required when --vault-dir is not provided")
         return out
     if note_path is None:
         raise ValueError("--note-path is required when --vault-dir is provided")
-    candidate = (vault_dir / note_path).resolve()
     vault_root = vault_dir.resolve()
-    try:
-        candidate.relative_to(vault_root)
-    except ValueError as exc:
+    requested = vault_dir / note_path
+    if requested.resolve() == vault_root:
+        raise ValueError("note path must name a file inside vault-dir")
+    if requested.suffix.lower() != suffix:
+        requested = requested.with_suffix(suffix)
+    candidate = requested.resolve()
+    if candidate == vault_root or not candidate.is_relative_to(vault_root):
         raise ValueError("note path must stay within vault-dir")
-    if candidate.suffix.lower() != ".md":
-        candidate = candidate.with_suffix(".md")
     return candidate
 
 

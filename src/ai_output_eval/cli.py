@@ -123,6 +123,7 @@ def obsidian_base_command(args: argparse.Namespace) -> int:
         out=Path(args.out) if args.out else None,
         vault_dir=Path(args.vault_dir) if args.vault_dir else None,
         note_path=args.note_path,
+        suffix=".base",
     )
     if out.suffix.lower() != ".base":
         out = out.with_suffix(".base")

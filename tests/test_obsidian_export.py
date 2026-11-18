@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import pytest
+
 from ai_output_eval.cli import main
 from ai_output_eval.obsidian_export import build_obsidian_note, resolve_obsidian_output
 
@@ -55,3 +57,31 @@ def test_obsidian_frontmatter_quotes_title():
     note = build_obsidian_note(title='Report: "Value"\nNext')
 
     assert 'title: "Report: \\"Value\\"\\nNext"' in note
+
+
+def test_resolve_obsidian_output_rejects_vault_root_itself(tmp_path: Path):
+    vault = tmp_path / "vault"
+    vault.mkdir()
+
+    with pytest.raises(ValueError):
+        resolve_obsidian_output(out=None, vault_dir=vault, note_path=".")
+
+
+def test_resolve_obsidian_output_checks_containment_after_suffix_change(tmp_path: Path):
+    vault = tmp_path / "vault"
+    vault.mkdir()
+    outside = tmp_path / "outside.md"
+    outside.write_text("keep", encoding="utf-8")
+    (vault / "report.md").symlink_to(outside)
+
+    with pytest.raises(ValueError):
+        resolve_obsidian_output(out=None, vault_dir=vault, note_path="report.txt")
+
+
+def test_resolve_obsidian_output_applies_requested_suffix_inside_vault(tmp_path: Path):
+    vault = tmp_path / "vault"
+    vault.mkdir()
+
+    resolved = resolve_obsidian_output(out=None, vault_dir=vault, note_path="views/profile", suffix=".base")
+
+    assert resolved == (vault / "views" / "profile.base").resolve()
