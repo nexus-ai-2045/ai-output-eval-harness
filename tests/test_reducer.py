@@ -43,3 +43,34 @@ def test_reduce_value_matrix_retries_when_seed_is_orthogonal_to_variance():
     result = reduce_value_matrix(labels, catalog, components=1)
 
     assert result["components"]
+
+
+def test_reduce_value_matrix_returns_the_dominant_component_first():
+    catalog = [
+        ValueDefinition(
+            id=value_id,
+            label=value_id,
+            ja_label=value_id,
+            cluster="rigor",
+            axis="warmth_vs_rigor",
+            pole="rigor",
+            keywords=(value_id,),
+        )
+        for value_id in ("a", "b", "c")
+    ]
+    patterns = [
+        [value_id for bit, value_id in zip((first, second, third), ("a", "b", "c")) if bit]
+        for first in (0, 1)
+        for second in (0, 1)
+        for third in (0, 1)
+    ]
+    value_sets = patterns + patterns + [["a", "b"], ["c"]]
+    labels = [{"case_id": f"case-{index}", "value_ids": value_ids} for index, value_ids in enumerate(value_sets)]
+
+    result = reduce_value_matrix(labels, catalog, components=1)
+
+    component = result["components"][0]
+    loadings = {item["value_id"]: item["loading"] for item in component["top_loadings"]}
+    assert component["eigenvalue"] > 0.3
+    assert loadings["a"] * loadings["b"] > 0
+    assert loadings["a"] * loadings["c"] < 0

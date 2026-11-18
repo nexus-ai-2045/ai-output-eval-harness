@@ -121,6 +121,8 @@ def _power_iteration(matrix: list[list[float]], *, iterations: int) -> list[floa
     seeds = [[float(index + 1) for index in range(size)]]
     seeds.extend([1.0 if index == axis else 0.0 for index in range(size)] for axis in range(size))
     fallback: list[float] = []
+    best: list[float] = []
+    best_value = 0.0
     for seed in seeds:
         seed_norm = sqrt(sum(value * value for value in seed))
         vector = [value / seed_norm for value in seed]
@@ -134,9 +136,13 @@ def _power_iteration(matrix: list[list[float]], *, iterations: int) -> list[floa
                 collapsed = True
                 break
             vector = [value / norm for value in next_vector]
-        if not collapsed:
-            return vector
-    return fallback
+        if collapsed:
+            continue
+        value = _quadratic_form(matrix, vector)
+        if not best or value > best_value + 1e-12:
+            best = vector
+            best_value = value
+    return best or fallback
 
 
 def _matvec(matrix: list[list[float]], vector: list[float]) -> list[float]:
