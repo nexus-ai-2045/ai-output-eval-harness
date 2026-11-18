@@ -1,6 +1,8 @@
 import json
+from pathlib import Path
 
-from ai_output_eval.catalog import load_catalog
+import ai_output_eval
+from ai_output_eval.catalog import DEFAULT_CATALOG_PATH, load_catalog
 
 
 def test_catalog_rejects_duplicate_ids(tmp_path):
@@ -68,3 +70,10 @@ def test_catalog_rejects_invalid_axis_pole_pair(tmp_path):
         assert "pole caution is invalid" in str(exc)
     else:
         raise AssertionError("expected invalid axis/pole pair to fail")
+
+
+def test_default_catalog_is_shipped_inside_the_package():
+    package_root = Path(ai_output_eval.__file__).resolve().parent
+
+    assert DEFAULT_CATALOG_PATH.is_relative_to(package_root)
+    assert load_catalog()

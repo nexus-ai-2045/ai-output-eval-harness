@@ -37,3 +37,11 @@ def test_evaluate_case_flags_unsupported_claim_and_low_confidence():
     assert result["posture_labels"]["rigor"] == "fail"
     assert result["posture_labels"]["candor"] == "warn"
 
+
+
+def test_evaluate_case_reports_invalid_evidence_without_raising():
+    result = evaluate_case({"case_id": "bad", "output": "x", "evidence": [42]})
+
+    assert result["schema_valid"] is False
+    assert "evidence" in result["missing_required_fields"]
+    assert result["unsupported_claims"] == []

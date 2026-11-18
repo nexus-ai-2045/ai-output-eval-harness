@@ -118,16 +118,25 @@ def _covariance(centered: list[list[float]]) -> list[list[float]]:
 
 def _power_iteration(matrix: list[list[float]], *, iterations: int) -> list[float]:
     size = len(matrix)
-    seed = [float(index + 1) for index in range(size)]
-    seed_norm = sqrt(sum(value * value for value in seed))
-    vector = [value / seed_norm for value in seed]
-    for _ in range(iterations):
-        next_vector = _matvec(matrix, vector)
-        norm = sqrt(sum(value * value for value in next_vector))
-        if norm < 1e-12:
+    seeds = [[float(index + 1) for index in range(size)]]
+    seeds.extend([1.0 if index == axis else 0.0 for index in range(size)] for axis in range(size))
+    fallback: list[float] = []
+    for seed in seeds:
+        seed_norm = sqrt(sum(value * value for value in seed))
+        vector = [value / seed_norm for value in seed]
+        if not fallback:
+            fallback = vector
+        collapsed = False
+        for _ in range(iterations):
+            next_vector = _matvec(matrix, vector)
+            norm = sqrt(sum(value * value for value in next_vector))
+            if norm < 1e-12:
+                collapsed = True
+                break
+            vector = [value / norm for value in next_vector]
+        if not collapsed:
             return vector
-        vector = [value / norm for value in next_vector]
-    return vector
+    return fallback
 
 
 def _matvec(matrix: list[list[float]], vector: list[float]) -> list[float]:

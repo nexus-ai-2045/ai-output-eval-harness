@@ -31,7 +31,7 @@ def evaluate_case(case: dict[str, Any]) -> dict[str, Any]:
     evidence = case.get("evidence", [])
 
     accuracy = field_accuracy(output, expected)
-    unsupported = find_unsupported_claims(output, evidence)
+    unsupported = [] if "evidence" in schema_errors else find_unsupported_claims(output, evidence)
     missing = sorted(set(schema_errors + missing_required_fields(output, expected)))
     low_conf = low_confidence_fields(case.get("confidence"))
     labels = label_posture(

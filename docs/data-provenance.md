@@ -6,7 +6,7 @@
 
 ## 価値観カタログ
 
-`catalogs/values_catalog.json` は、このrepositoryで管理する小規模なルールベース評価用カタログです。一般的な概念と日本語・英語の検索語を使っており、Anthropic研究の3,307 values、339 high-level values、会話データを収録していません。
+`src/ai_output_eval/catalogs/values_catalog.json` は、このrepositoryで管理する小規模なルールベース評価用カタログです。一般的な概念と日本語・英語の検索語を使っており、Anthropic研究の3,307 values、339 high-level values、会話データを収録していません。
 
 カタログは心理測定尺度や標準化された分類体系ではありません。出力傾向を探索するための初期ルールであり、品質、文化的妥当性、網羅性を保証しません。
 

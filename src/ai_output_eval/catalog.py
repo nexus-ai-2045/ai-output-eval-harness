@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any
 
 
-DEFAULT_CATALOG_PATH = Path(__file__).resolve().parents[2] / "catalogs" / "values_catalog.json"
+DEFAULT_CATALOG_PATH = Path(__file__).resolve().parent / "catalogs" / "values_catalog.json"
 VALID_AXIS_POLES = {
     "deference_vs_caution": {"deference", "caution"},
     "warmth_vs_rigor": {"warmth", "rigor"},
